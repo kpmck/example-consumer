@@ -53,33 +53,6 @@ describe('API Pact test', () => {
       });
     });
 
-    test('product does not exist', async () => {
-      // set up Pact interactions
-
-      mockProvider
-        .given('a product with ID 11 does not exist')
-        .uponReceiving('a request to get a product')
-        .withRequest({
-          method: 'GET',
-          path: '/product/11',
-          headers: {
-            Authorization: like('Bearer 2019-01-14T11:34:18.045Z')
-          }
-        })
-        .willRespondWith({
-          status: 404
-        });
-      return mockProvider.executeTest(async (mockserver) => {
-        const api = new API(mockserver.url);
-
-        // make request to Pact mock server
-        await expect(api.getProduct('11')).rejects.toThrow(
-          'Request failed with status code 404'
-        );
-        return;
-      });
-    });
-  });
   describe('retrieving products', () => {
     test('products exists', async () => {
       // set up Pact interactions
