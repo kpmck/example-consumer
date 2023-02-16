@@ -53,6 +53,7 @@ describe('API Pact test', () => {
       });
     });
 
+  });
   describe('retrieving products', () => {
     test('products exists', async () => {
       // set up Pact interactions
